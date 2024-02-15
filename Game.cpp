@@ -2,12 +2,12 @@
 #include "Menu.h"
 #include "Readfile.h"
 
-const unsigned short int figures[7][4] = { 1,3,5,7, 2,4,5,7, 3,5,4,6, 3,5,4,7, 2,5,3,7, 3,5,7,6, 2,3,4,5, }; // Массив фигурок-тетрамино
+const unsigned short int figures[7][4] = { 1,3,5,7, 2,4,5,7, 3,5,4,6, 3,5,4,7, 2,5,3,7, 3,5,7,6, 2,3,4,5, }; // Масив фігурок-тетраміно
 
 const int x = 17; // ширина поля
 const int y = 26; // висота поля
 
-unsigned short int field[x][y + 1] = { 0 }; // игровое поле где x — это высота поля, а y — его ширина.
+unsigned short int field[x][y + 1] = { 0 }; // ігрове поле
 
 struct coord
 {
@@ -137,10 +137,10 @@ void render_figure(RenderWindow& window, Sprite sprite_figure_main, Sprite sprit
 		}
 		b[i].x = figures[next_figure][i] % 2 + 18; // next фігура (координати)
 		b[i].y = figures[next_figure][i] / 2 + 1;
-		// Устанавливаем позицию каждого кусочка тетрамино
+		// Встановлення позиції кожного кусочка тетраміно
 		sprite_figure_main.setPosition(a[i].x * 24, a[i].y * 24);
 		sprite_figure_next.setPosition(b[i].x * 24, b[i].y * 24);
-		// Отрисовка спрайта
+
 		window.draw(sprite_figure_main);
 		window.draw(sprite_figure_next);
 	}
@@ -234,7 +234,7 @@ bool game(RenderWindow& window, Music& game_music, Music& menu_music, Sound& des
 	Clock clock;
 	Event event;
 
-	int main_figure = rand() % 7; // задаем тип тетрамино (основного)
+	int main_figure = rand() % 7; // задання типу тетраміно (основного)
 	int color_main = rand() % 4 + 1; // колір фігури (основної)
 	double time_respawn = 2, time_respawn_user = 0.5;
 	bool destruction_check = false;
@@ -253,8 +253,8 @@ bool game(RenderWindow& window, Music& game_music, Music& menu_music, Sound& des
 
 	while (window.isOpen())
 	{
-		int next_figure = rand() % 7; // задаем тип тетрамино (next)
-		int color_next = rand() % 4 + 1; // колір фігури (next)
+		int next_figure = rand() % 7;
+		int color_next = rand() % 4 + 1;
 		int offsetX = rand() % 16; // зсув фігури по X
 
 		sprite_color(sprite_figure_main, color_main);
