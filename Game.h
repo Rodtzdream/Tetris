@@ -8,11 +8,6 @@
 
 using namespace sf;
 
-extern int high_score;
-extern int score;
-
-extern void writeIniFile();
-
 bool gameover();
 void sprite_color(Sprite& sprite, int color);
 void fill_field(RenderWindow& window, Sprite& sprite_save_figure);

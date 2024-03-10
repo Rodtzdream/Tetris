@@ -6,18 +6,8 @@
 
 using namespace sf;
 
-extern float mus_vol_menu;
-extern float mus_vol_game;
-extern float mus_vol_gen;
-extern bool music_on;
-
-extern int high_score;
-extern int score;
-
 extern bool game(RenderWindow& window, Music& game_music, Music& menu_music, Sound& destruction_sound, Sound& switch_sound, Sound& select_sound, Sound& gameover_sound);
 extern void fill_field(RenderWindow& window, Sprite& sprite_save_figure);
-extern void writeIniFile();
-extern void writeFile();
 
 bool menu(RenderWindow& window, Music& game_music, Music& menu_music, Sound& destruction_sound, Sound& switch_sound, Sound& select_sound, Sound& gameover_sound);
 bool menu_pause(RenderWindow& window, Sprite sprite_figure_main, Sprite sprite_figure_next, Sprite sprite_background, Sprite sprite_save_figure, Text highscore_text, Text score_text, Music& game_music, Music& menu_music, Sound& destruction_sound, Sound& switch_sound, Sound& select_sound, Sound& gameover_sound);

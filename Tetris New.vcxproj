@@ -459,7 +459,9 @@ copy /Y "$(SolutionDir)resources"  "$(TargetDir)resources\"</Command>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="ReadFile.cpp" />
+    <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SoundSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="extlibs\bin\x64\openal32.dll" />
@@ -678,7 +680,9 @@ copy /Y "$(SolutionDir)resources"  "$(TargetDir)resources\"</Command>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="ReadFile.h" />
+    <ClInclude Include="GameData.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SoundSettings.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="resources\ball.wav" />

@@ -1,11 +1,6 @@
-#include "ReadFile.h"
+#include "GameData.h"
 
-int score_zsuv = 7;
-char file_rozdile = '.';
-extern int high_score;
-extern int score;
-
-void writeEncryptedData(char* st, ofstream& sc)
+void GameData::writeEncryptedData(char* st, ofstream& sc)
 {
 	int rand_num;
 	char rand_char;
@@ -26,7 +21,7 @@ void writeEncryptedData(char* st, ofstream& sc)
 	sc.write((char*)&file_rozdile, sizeof(file_rozdile));
 }
 
-void shiftScoreCharacters(char* str)
+void GameData::shiftScoreCharacters(char* str)
 {
 	int score_zsuv = 7, tem;
 	char temp;
@@ -39,7 +34,7 @@ void shiftScoreCharacters(char* str)
 	}
 }
 
-void decryptScoreData(char* st)
+void GameData::decryptScoreData(char* st)
 {
 	high_score = 0;
 	char st1[4] = "ONE";
@@ -106,7 +101,7 @@ void decryptScoreData(char* st)
 	high_score /= 10;
 }
 
-void readFile()
+void GameData::readData()
 {
 	string filename = "highscore.dat";
 	ifstream out;
@@ -118,7 +113,7 @@ void readFile()
 	file_size = out.tellg();
 	out.seekg(0);
 
-	char dig[70] = { "uraisdedinsid" };
+	char dig[70] = {};
 	char temp;
 
 	if (file_size != 0)
@@ -135,7 +130,7 @@ void readFile()
 	out.close();
 }
 
-void writeFile()
+void GameData::writeData()
 {
 	string filename = "highscore.dat";
 	ofstream sc(filename, ofstream::binary);
@@ -199,35 +194,4 @@ void writeFile()
 	}
 	delete[] score_arr;
 	sc.close();
-}
-
-void writeIniFile()
-{
-	mINI::INIFile file_coonfig("music_sounds_coonfig.ini");
-	mINI::INIStructure data;
-
-	data["options"]["general_volume"] = std::to_string(mus_vol_gen);
-	data["options"]["music_volume"] = std::to_string(mus_vol_game);
-	data["options"]["sounds_volume"] = std::to_string(mus_vol_menu);
-	data["options"]["music_on"] = std::to_string(music_on);
-
-	file_coonfig.generate(data);
-}
-
-void readIniFile()
-{
-	mINI::INIFile file_coonfig("music_sounds_coonfig.ini");
-	mINI::INIStructure data;
-
-	file_coonfig.read(data);
-
-	std::string temp = data.get("options").get("general_volume");
-	mus_vol_gen = std::stof(temp);
-	temp = data.get("options").get("music_volume");
-	mus_vol_game = std::stof(temp);
-	temp = data.get("options").get("sounds_volume");
-	mus_vol_menu = std::stof(temp);
-
-	temp = data.get("options").get("music_on");
-	music_on = std::stof(temp);
 }
