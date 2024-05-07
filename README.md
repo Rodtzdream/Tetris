@@ -14,10 +14,6 @@ Tetris - це 2D відеогра у жанрі пазлів, яка є поєд
 - **SFML (Simple and Fast Multimedia Library)**: Бібліотека, яка використовувалася для створення графіки та звукових ефектів.
 - **CMake**: Інструмент для автоматизації процесу збірки проекту.
 
-## Музичний супровід
-
-Музичний супровід гри Tetris створює атмосферу гри та додає до враження від геймплею. Звукові ефекти та музика можуть бути відрегульовані в налаштуваннях гри.
-
 ## Встановлення та запуск
 
 ### Встановлення за допомогою .exe
@@ -32,28 +28,56 @@ Tetris - це 2D відеогра у жанрі пазлів, яка є поєд
 
 Для збірки вихідних кодів проекту за допомогою CMake, виконайте наступні кроки:
 
-1. **Відкрийте термінал та перейдіть до кореневої директорії проекту.**
-2. **Створіть директорію для збірки:**
+1. **Встановлення залежностей:**
+
+Перш ніж почати збірку проекту, переконайтеся, що всі необхідні залежності встановлені на вашій системі. Використовуйте наступні команди для встановлення залежностей SFML на Linux:
+
+#### Ubuntu / Debian
+
+```bash
+sudo apt-get install libfreetype6-dev libx11-dev libxrandr-dev libudev-dev libgl1-mesa-dev libflac-dev libogg-dev libvorbis-dev libvorbisenc2 libvorbisfile3 libopenal-dev libpthread-stubs0-dev xorg-dev
+```
+
+#### Fedora
+
+```bash
+sudo dnf install freetype-devel libX11-devel libXrandr-devel libudev-devel mesa-libGL-devel flac-devel libogg-devel libvorbis-devel openal-soft-devel xorg-x11-proto-devel
+```
+
+#### Arch Linux
+
+```bash
+sudo pacman -S freetype2 libx11 libxrandr libudev mesa flac libogg libvorbis openal xorg-server-devel
+```
+
+#### openSUSE
+
+```bash
+sudo zypper install freetype-devel libX11-devel libXrandr-devel libudev-devel Mesa-libGL-devel flac-devel libogg-devel libvorbis-devel openal-soft-devel xorg-x11-devel
+```
+
+2. **Відкрийте термінал та перейдіть до кореневої директорії проекту.**
+3. **Створіть директорію для збірки:**
 
 ```bash
 mkdir build && cd build
 ```
 
-3. **Налаштуйте збірку за допомогою CMake:**
+4. **Налаштуйте збірку за допомогою CMake:**
 
 ```bash
 cmake ..
 ```
 
-> Примітка: Для правильної збірки проекту, вам потрібна мінімальна версія CMake 3.27 або вище.
+> Примітка: для правильної збірки проекту, вам потрібна мінімальна версія CMake 3.27 або вище.
 
-4. **Виконайте збірку:**
+5. **Виконайте збірку:**
 
 ```bash
 cmake --build .
 ```
 
-5. **Після успішної збірки ви можете запустити гру зі створеної вихідної директорії:** `build/bin`
+6. **Після успішної збірки ви можете запустити гру зі створеної вихідної директорії:** `build/bin`
 
 ## Скріншоти гри
 
