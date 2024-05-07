@@ -45,6 +45,8 @@ mkdir build && cd build
 cmake ..
 ```
 
+> Примітка: Для правильної збірки проекту, вам потрібна мінімальна версія CMake 3.27 або вище.
+
 4. **Виконайте збірку:**
 
 ```bash
@@ -57,11 +59,11 @@ cmake --build .
 
 ### Головне меню гри
 
-![Головне меню гри](screenshots/screenshot1.png)
+![Головне меню гри](https://imgur.com/wMNzctY.png)
 
 ### Процес гри
 
-![Процес гри](screenshots/screenshot2.png)
+![Процес гри](https://imgur.com/qBzcNyd.png)
 
 ## Автор
 
