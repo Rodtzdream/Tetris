@@ -1,36 +1,36 @@
 # Tetris
 
-Цей проект - гра у жанрі пазлів, яка поєднує в собі елементи головоломки та стратегії. Гра базується на класичній версії Tetris.
+This project is a puzzle game that combines elements of a puzzle and strategy game. It is based on the classic version of Tetris.
 
-## Опис
+## Description
 
-Tetris - це 2D відеогра у жанрі пазлів, яка є поєднанням елементів головоломки та стратегії. Гравець має за завдання розташовувати падаючі фігури у такий спосіб, щоб заповнити ряди по всій ширині ігрового поля, щоб вони зникли і зробили місце для нових фігур.
+Tetris is a 2D puzzle video game that combines elements of puzzle and strategy. The player's task is to arrange falling pieces in such a way as to fill rows across the entire width of the playing field, causing them to disappear and make room for new pieces.
 
-Гра має графічний інтерфейс та звукові ефекти, які створені з використанням бібліотеки SFML. Також була реалізована система запису рекордів користувачів, що дозволяє змагатися з друзями за кращий результат.
+The game features a graphical interface and sound effects created using the SFML library. Additionally, a user record-keeping system has been implemented, allowing players to compete with friends for the best score.
 
-## Засоби та технології
+## Tools and Technologies
 
-- **C++**: Мова програмування, в якій був реалізований код гри.
-- **SFML (Simple and Fast Multimedia Library)**: Бібліотека, яка використовувалася для створення графіки та звукових ефектів.
-- **CMake**: Інструмент для автоматизації процесу збірки проекту.
+- **C++**: The programming language used to implement the game's code.
+- **SFML (Simple and Fast Multimedia Library)**: The library used for creating graphics and sound effects.
+- **CMake**: The tool used to automate the project's build process.
 
-## Встановлення та запуск
+## Installation and Running
 
-### Встановлення за допомогою .exe
+### Installation via .exe
 
-Для встановлення та запуску гри, завантажте відповідний інсталятор за наступним шляхом:
+To install and run the game, download the appropriate installer from the following path:
 
 - [Tetris_x86.exe](https://github.com/Rodtzdream/Tetris/tree/main/bin)
 
-Після завершення встановлення, ви можете запустити гру зі створеного ярлика на робочому столі або в меню "Пуск".
+After completing the installation, you can start the game from the shortcut created on the desktop or from the "Start" menu.
 
-### Збірка за допомогою CMake
+### Building with CMake
 
-Для збірки вихідних кодів проекту за допомогою CMake, виконайте наступні кроки:
+To build the project's source code using CMake, follow these steps:
 
-1. **Встановлення залежностей:**
+1. **Install dependencies:**
 
-Перш ніж почати збірку проекту, переконайтеся, що всі необхідні залежності встановлені на вашій системі. Використовуйте наступні команди для встановлення залежностей SFML на Linux:
+Before starting the build process, ensure that all necessary dependencies are installed on your system. Use the following commands to install the SFML dependencies on Linux:
 
 #### Ubuntu / Debian
 
@@ -56,50 +56,47 @@ sudo pacman -S freetype2 libx11 libxrandr libudev mesa flac libogg libvorbis ope
 sudo zypper install freetype-devel libX11-devel libXrandr-devel libudev-devel Mesa-libGL-devel flac-devel libogg-devel libvorbis-devel openal-soft-devel xorg-x11-devel
 ```
 
-2. **Відкрийте термінал та перейдіть до кореневої директорії проекту.**
-3. **Створіть директорію для збірки:**
+2. **Open a terminal and navigate to the root directory of the project.1**
+
+3. **Create a build directory:**
 
 ```bash
 mkdir build && cd build
 ```
 
-4. **Налаштуйте збірку за допомогою CMake:**
+4. **Configure the build with CMake:**
 
 ```bash
 cmake ..
 ```
 
-> Примітка: для правильної збірки проекту, вам потрібна мінімальна версія CMake 3.27 або вище.
+> Note: To build the project correctly, you need CMake version 3.27 or higher.
 
-5. **Виконайте збірку:**
+5. **Execute the build:**
 
 ```bash
 cmake --build .
 ```
 
-6. **Після успішної збірки ви можете запустити гру зі створеної вихідної директорії:** `build/bin`
+6. **After a successful build, you can run the game from the created output directory:** `build/bin`
 
-## Скріншоти гри
+## Game screenshots
 
-### Головне меню гри
+### Main menu
 
 ![Головне меню гри](https://imgur.com/wMNzctY.png)
 
-### Процес гри
+### Gameplay
 
 ![Процес гри](https://imgur.com/qBzcNyd.png)
 
-## Автор
+## Author
 
-**Олійник Юрій**
+**Yurii Oliinyk**
 
-- Пошта: <olijnikura@gmail.com>
-- Телеграм: [@rodtzdream](https://t.me/rodtzdream)
+- Email: <olijnikura@gmail.com>
+- Telegram: [@rodtzdream](https://t.me/rodtzdream)
 
-## Підтримка
+## Support
 
-Якщо у вас є які-небудь питання або пропозиції щодо цього проекту, не соромтеся зв'язатися зі мною.
-
-## Ліцензія
-
-Цей проект є опенсорсним, що означає, що ви можете вільно використовувати, модифікувати та розповсюджувати його в межах умов ліцензії. Детальну інформацію можна знайти у файлі README.md або шляхом звернення до автора.
+If you have any questions or suggestions regarding this project, please feel free to contact me.
