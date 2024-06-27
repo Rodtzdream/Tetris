@@ -10,6 +10,7 @@ public:
 	GameMusic() = default;
 	bool loadFromFile(const std::string& filePath);
 	void play();
+	void pause();
 	void stop();
 	void setLoop(bool loop);
 	void setVolume(float volume);

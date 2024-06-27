@@ -10,6 +10,11 @@ void GameMusic::play()
 	music.play();
 }
 
+void GameMusic::pause()
+{
+	music.pause();
+}
+
 void GameMusic::stop()
 {
 	music.stop();
