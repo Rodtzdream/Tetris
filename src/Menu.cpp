@@ -101,8 +101,8 @@ bool menu(RenderWindow &window)
 					audioManager.playSound("select");
 					audioManager.pauseMusic("menu");
 					settings_sprite.setColor(Color::White);
-					//if (!settings(window, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound))
-						//return 0;
+					if (!settings(window))
+						return 0;
 					audioManager.playMusic("menu");
 				}
 			}
@@ -279,7 +279,7 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 					select_sound.play();
 					game_music.pause();
 					settings_sprite.setColor(Color::White);
-					if (!settings(window, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound))
+					if (!settings(window))
 						return false;
 					if (music_on)
 						music_square_texture.loadFromFile(std::string(XSTRING(SOURCE_ROOT)) + "/resources/volume.png");
@@ -455,7 +455,7 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 					select_sound.play();
 					menu_music.pause();
 					settings_sprite.setColor(Color::White);
-					if (!settings(window, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound))
+					if (!settings(window))
 						return 0;
 				}
 			}
@@ -519,7 +519,7 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 	}
 }
 
-bool settings(RenderWindow &window, Music &game_music, Music &menu_music, Sound &destruction_sound, Sound &switch_sound, Sound &select_sound, Sound &gameover_sound)
+bool settings(RenderWindow &window)
 {
 	int menuNum = 0;
 	bool isButton_select = false;
@@ -530,7 +530,8 @@ bool settings(RenderWindow &window, Music &game_music, Music &menu_music, Sound 
 		exit(0);
 	}
 
-	menu_music.play();
+	AudioManager &audioManager = AudioManager::getInstance();
+	audioManager.playMusic("menu");
 
 	Texture mus_menu_tex, plus_tex, minus_tex, mus_game_tex, but_back_tex, mus_gen_tex, background_texture, mixer_field_texture, mixer_texture, music_square_texture;
 
@@ -646,8 +647,6 @@ bool settings(RenderWindow &window, Music &game_music, Music &menu_music, Sound 
 
 	window.display();
 
-	AudioManager &audioManager = AudioManager::getInstance();
-
 	Event event;
 
 	while (window.isOpen())
@@ -670,12 +669,12 @@ bool settings(RenderWindow &window, Music &game_music, Music &menu_music, Sound 
 				return 0;
 
 			case Event::LostFocus:
-				menu_music.pause();
-				switch_sound.setVolume(0);
+				audioManager.pauseMusic("menu");
+				audioManager.setSoundVolume("switch", 0);
 				break;
 
 			case Event::GainedFocus:
-				menu_music.play();
+				audioManager.playMusic("menu");
 				if (music_on)
 					audioManager.onMusic();
 				else
@@ -686,7 +685,7 @@ bool settings(RenderWindow &window, Music &game_music, Music &menu_music, Sound 
 				switch (event.key.code)
 				{
 				case Keyboard::Escape:
-					menu_music.stop();
+					audioManager.stopMusic("menu");
 					return true;
 				}
 			}
@@ -843,12 +842,12 @@ bool settings(RenderWindow &window, Music &game_music, Music &menu_music, Sound 
 			{
 				but_back_sprite.setColor(Color::Green);
 				if (!isButton_select)
-					switch_sound.play();
+					audioManager.playSound("switch");
 				isButton_select = true;
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
-					select_sound.play();
-					menu_music.pause();
+					audioManager.playSound("select");
+					audioManager.pauseMusic("menu");
 					return 1;
 				}
 			}
