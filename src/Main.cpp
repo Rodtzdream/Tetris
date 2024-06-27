@@ -1,5 +1,4 @@
 #include "Main.h"
-#include <AudioManager.h>
 
 int main()
 {
@@ -9,10 +8,6 @@ int main()
 	read_file();
 	read_ini_file();
 
-	AudioManager& audioManager = AudioManager::getInstance();
-
-	audioManager.playMusic("menu");
-
-	//menu(window, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound);
+	menu(window);
 	return 0;
 }

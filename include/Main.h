@@ -4,7 +4,7 @@
 
 using namespace sf;
 
-extern bool menu(RenderWindow&, Music&, Music&, Sound&, Sound&, Sound&, Sound&);
+extern bool menu(RenderWindow&);
 extern void read_file();
 extern void read_ini_file();
 

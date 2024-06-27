@@ -111,3 +111,23 @@ void AudioManager::setMusicLooping(const std::string& musicName, bool loop)
 		it->second->setLoop(loop);
 	}
 }
+
+void AudioManager::onMusic()
+{
+	setMusicVolume("game", mus_vol_game * (mus_vol_gen / 100));
+	setMusicVolume("menu", mus_vol_game * (mus_vol_gen / 100));
+	setSoundVolume("destruction", mus_vol_menu * (mus_vol_gen / 100));
+	setSoundVolume("switch", mus_vol_menu * (mus_vol_gen / 100));
+	setSoundVolume("select", mus_vol_menu * (mus_vol_gen / 100));
+	setSoundVolume("gameover", mus_vol_menu * (mus_vol_gen / 100));
+}
+
+void AudioManager::offMusic()
+{
+	setMusicVolume("game", 0);
+	setMusicVolume("menu", 0);
+	setSoundVolume("destruction", 0);
+	setSoundVolume("switch", 0);
+	setSoundVolume("select", 0);
+	setSoundVolume("gameover", 0);
+}

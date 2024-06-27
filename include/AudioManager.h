@@ -27,6 +27,9 @@ public:
 	void setSoundVolume(const std::string& soundName, float volume);
 	void setMusicLooping(const std::string& musicName, bool loop);
 
+	void onMusic();
+	void offMusic();
+
 private:
 	AudioManager();
 	~AudioManager() {}
