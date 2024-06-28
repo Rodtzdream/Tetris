@@ -6,40 +6,19 @@
 #define XSTRING(x) STRING(x)
 
 const unsigned short int figures[7][4] = {
-	1,
-	3,
-	5,
-	7,
-	2,
-	4,
-	5,
-	7,
-	3,
-	5,
-	4,
-	6,
-	3,
-	5,
-	4,
-	7,
-	2,
-	5,
-	3,
-	7,
-	3,
-	5,
-	7,
-	6,
-	2,
-	3,
-	4,
-	5,
+	1,3,5,7,
+	2,4,5,7,
+	3,5,4,6,
+	3,5,4,7,
+	2,5,3,7,
+	3,5,7,6,
+	2,3,4,5,
 }; // ������ �������-���������
 
 const int x = 17; // ������ ����
 const int y = 26; // ������ ����
 
-unsigned short int field[x][y + 1] = {0}; // ������� ���� ��� x � ��� ������ ����, � y � ��� ������.
+unsigned short int field[x][y + 1] = { 0 }; // ������� ���� ��� x � ��� ������ ����, � y � ��� ������.
 
 struct coord
 {
@@ -57,7 +36,7 @@ bool gameover()
 	return false;
 }
 
-void sprite_color(Sprite &sprite, int color)
+void sprite_color(Sprite& sprite, int color)
 {
 	switch (color)
 	{
@@ -79,7 +58,7 @@ void sprite_color(Sprite &sprite, int color)
 	}
 }
 
-void fill_field(RenderWindow &window, Sprite &sprite_save_figure)
+void fill_field(RenderWindow& window, Sprite& sprite_save_figure)
 {
 	for (int i = 0; i < 17; i++)
 	{
@@ -145,7 +124,7 @@ bool check_sides_rotate(int main_figure, int offsetX, int offsetY, double angle)
 	return true;
 }
 
-void render_figure(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_figure_next, Sprite sprite_background, Sprite sprite_save_figure, Text highscore_text, Text score_text, double angle, int main_figure, int next_figure, int offsetX, int offsetY)
+void render_figure(RenderWindow& window, Sprite sprite_figure_main, Sprite sprite_figure_next, Sprite sprite_background, Sprite sprite_save_figure, Text highscore_text, Text score_text, double angle, int main_figure, int next_figure, int offsetX, int offsetY)
 {
 	window.clear(Color::White);
 	window.draw(sprite_background); // ������ ����
@@ -182,7 +161,7 @@ void render_figure(RenderWindow &window, Sprite sprite_figure_main, Sprite sprit
 	window.display();
 }
 
-bool destruction(Text &score_text, Text &highscore_text)
+bool destruction(Text& score_text, Text& highscore_text)
 {
 	string highscore_str, score_str;
 	int k = 0;
@@ -229,7 +208,7 @@ bool destruction(Text &score_text, Text &highscore_text)
 	return check;
 }
 
-bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &destruction_sound, Sound &switch_sound, Sound &select_sound, Sound &gameover_sound)
+bool game(RenderWindow& window)
 {
 	Texture texture, background;
 
@@ -279,7 +258,9 @@ bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &des
 		}
 	}
 
-	game_music.play();
+	AudioManager& audioManager = AudioManager::getInstance();
+
+	audioManager.playMusic("game");
 
 	score = 0;
 
@@ -309,7 +290,7 @@ bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &des
 				switch (event.type)
 				{
 				case Event::Closed:
-					game_music.stop();
+					audioManager.stopMusic("game");
 					if (score > high_score)
 					{
 						high_score = score;
@@ -320,9 +301,9 @@ bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &des
 					return 0;
 
 				case Event::LostFocus:
-					game_music.pause();
-					if (menu_pause(window, sprite_figure_main, sprite_figure_next, sprite_background, sprite_save_figure, highscore_text, score_text, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound))
-						game_music.play();
+					audioManager.pauseMusic("game");
+					if (menu_pause(window, sprite_figure_main, sprite_figure_next, sprite_background, sprite_save_figure, highscore_text, score_text))
+						audioManager.playMusic("game");
 					else
 						return 0;
 
@@ -364,11 +345,11 @@ bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &des
 						}
 						break;
 					case Keyboard::Escape:
-						game_music.pause();
-						if (!menu_pause(window, sprite_figure_main, sprite_figure_next, sprite_background, sprite_save_figure, highscore_text, score_text, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound))
+						audioManager.pauseMusic("game");
+						if (!menu_pause(window, sprite_figure_main, sprite_figure_next, sprite_background, sprite_save_figure, highscore_text, score_text))
 							return 0;
 						else
-							game_music.play();
+							audioManager.playMusic("game");
 					}
 				}
 			}
@@ -387,7 +368,7 @@ bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &des
 		}
 		///*   �����'���������� ������� ������ �� ���   *///
 		{
-			destruction_sound.stop();
+			audioManager.stopSound("destruction");
 			time_respawn = 0;
 			window.clear(Color::White);		// �������� ������
 			window.draw(sprite_background); // ������ ����
@@ -400,7 +381,7 @@ bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &des
 			// fill_field(window, sprite_save_figure); // ���������� ����
 			if (destruction(score_text, highscore_text))
 			{
-				destruction_sound.play();
+				audioManager.playSound("destruction");
 			}
 			fill_field(window, sprite_save_figure); // ���������� ����
 			window.draw(score_text);
@@ -410,8 +391,9 @@ bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &des
 		}
 		if (gameover())
 		{
-			game_music.stop();
-			menu_restart(window, sprite_figure_main, sprite_figure_next, sprite_background, sprite_save_figure, highscore_text, score_text, font, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound);
+			audioManager.stopMusic("game");
+			audioManager.playSound("gameover");
+			menu_restart(window, sprite_figure_main, sprite_figure_next, sprite_background, sprite_save_figure, highscore_text, score_text, font);
 			return 0;
 		}
 		main_figure = next_figure;

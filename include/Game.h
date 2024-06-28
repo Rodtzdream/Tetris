@@ -22,4 +22,4 @@ bool check_sides(int main_figure, int offsetX, int offsetY, double angle);
 bool check_sides_rotate(int main_figure, int offsetX, int offsetY, double angle);
 void render_figure(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_figure_next, Sprite sprite_background, Sprite sprite_save_figure, Text high_score_text, Text score_text, double angle, int main_figure, int next_figure, int offsetX, int offsetY);
 bool destruction(Text &score_text, Text &highscore_text);
-bool game(RenderWindow &window, Music &game_music, Music &menu_music, Sound &destruction_sound, Sound &switch_sound, Sound &select_sound, Sound &gameover_sound);
+bool game(RenderWindow &window);

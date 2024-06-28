@@ -3,7 +3,7 @@
 #define STRING(x) #x
 #define XSTRING(x) STRING(x)
 
-bool menu(RenderWindow &window)
+bool menu(RenderWindow& window)
 {
 	bool isButton_select = false;
 
@@ -86,7 +86,7 @@ bool menu(RenderWindow &window)
 				{
 					audioManager.playSound("select");
 					audioManager.stopMusic("menu");
-					//game(window);
+					game(window);
 					return 0;
 				}
 			}
@@ -166,7 +166,7 @@ bool menu(RenderWindow &window)
 	return 0;
 }
 
-bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_figure_next, Sprite sprite_background, Sprite sprite_save_figure, Text highscore_text, Text score_text, Music &game_music, Music &menu_music, Sound &destruction_sound, Sound &switch_sound, Sound &select_sound, Sound &gameover_sound)
+bool menu_pause(RenderWindow& window, Sprite sprite_figure_main, Sprite sprite_figure_next, Sprite sprite_background, Sprite sprite_save_figure, Text highscore_text, Text score_text)
 {
 	bool isButton_select = false;
 
@@ -202,7 +202,7 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 	window.draw(music_square_sprite);
 	window.display();
 
-	AudioManager &audioManager = AudioManager::getInstance();
+	AudioManager& audioManager = AudioManager::getInstance();
 
 	while (window.isOpen())
 	{
@@ -225,7 +225,7 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 				return false;
 
 			case Event::LostFocus:
-				switch_sound.setVolume(0);
+				audioManager.setMusicVolume("switch", 0);
 				break;
 
 			case Event::GainedFocus:
@@ -246,11 +246,11 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 			{
 				resume_sprite.setColor(Color::Green);
 				if (!isButton_select)
-					switch_sound.play();
+					audioManager.playSound("switch");
 				isButton_select = true;
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
-					select_sound.play();
+					audioManager.playSound("select");
 					return true;
 				}
 			}
@@ -258,13 +258,13 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 			{
 				restart_sprite.setColor(Color::Green);
 				if (!isButton_select)
-					switch_sound.play();
+					audioManager.playSound("switch");
 				isButton_select = true;
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
-					select_sound.play();
-					game_music.stop();
-					game(window, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound);
+					audioManager.playSound("select");
+					audioManager.stopMusic("game");
+					game(window);
 					return false;
 				}
 			}
@@ -272,12 +272,12 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 			{
 				settings_sprite.setColor(Color::Green);
 				if (!isButton_select)
-					switch_sound.play();
+					audioManager.playSound("switch");
 				isButton_select = true;
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
-					select_sound.play();
-					game_music.pause();
+					audioManager.playSound("select");
+					audioManager.pauseMusic("game");
 					settings_sprite.setColor(Color::White);
 					if (!settings(window))
 						return false;
@@ -291,13 +291,13 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 			{
 				main_menu_sprite.setColor(Color::Green);
 				if (!isButton_select)
-					switch_sound.play();
+					audioManager.playSound("switch");
 				isButton_select = true;
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
-					select_sound.play();
-					game_music.stop();
-					menu_music.stop();
+					audioManager.playSound("select");
+					audioManager.stopMusic("game");
+					audioManager.stopMusic("menu");
 					menu(window);
 					return false;
 				}
@@ -330,7 +330,7 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 				main_menu_sprite.setColor(Color::White);
 				settings_sprite.setColor(Color::White);
 				music_square_sprite.setColor(Color::White);
-				switch_sound.stop();
+				audioManager.stopSound("switch");
 				isButton_select = false;
 			}
 			window.clear(Color::White);
@@ -348,10 +348,8 @@ bool menu_pause(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_f
 	}
 }
 
-bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite_figure_next, Sprite sprite_background, Sprite sprite_save_figure, Text highscore_text, Text score_text, Font font, Music &game_music, Music &menu_music, Sound &destruction_sound, Sound &switch_sound, Sound &select_sound, Sound &gameover_sound)
+bool menu_restart(RenderWindow& window, Sprite sprite_figure_main, Sprite sprite_figure_next, Sprite sprite_background, Sprite sprite_save_figure, Text highscore_text, Text score_text, Font font)
 {
-	gameover_sound.play();
-
 	bool isButton_select = false;
 
 	Texture restart_texture, settings_texture, main_menu_texture, music_square_texture;
@@ -389,7 +387,7 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 	window.draw(music_square_sprite);
 	window.display();
 
-	AudioManager &audioManager = AudioManager::getInstance();
+	AudioManager& audioManager = AudioManager::getInstance();
 
 	while (window.isOpen())
 	{
@@ -412,7 +410,7 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 				return false;
 
 			case Event::LostFocus:
-				switch_sound.setVolume(0);
+				audioManager.setSoundVolume("switch", 0);
 				break;
 
 			case Event::GainedFocus:
@@ -434,13 +432,13 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 			{
 				restart_sprite.setColor(Color::Green);
 				if (!isButton_select)
-					switch_sound.play();
+					audioManager.playSound("switch");
 				isButton_select = true;
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
-					select_sound.play();
-					game_music.stop();
-					game(window, game_music, menu_music, destruction_sound, switch_sound, select_sound, gameover_sound);
+					audioManager.playSound("select");
+					audioManager.stopMusic("game");
+					game(window);
 					return true;
 				}
 			}
@@ -448,12 +446,12 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 			{
 				settings_sprite.setColor(Color::Green);
 				if (!isButton_select)
-					switch_sound.play();
+					audioManager.playSound("switch");
 				isButton_select = true;
 				if (Mouse::isButtonPressed(Mouse::Left)) // 2
 				{
-					select_sound.play();
-					menu_music.pause();
+					audioManager.playSound("select");
+					audioManager.pauseMusic("menu");
 					settings_sprite.setColor(Color::White);
 					if (!settings(window))
 						return 0;
@@ -463,13 +461,13 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 			{
 				main_menu_sprite.setColor(Color::Green);
 				if (!isButton_select)
-					switch_sound.play();
+					audioManager.playSound("switch");
 				isButton_select = true;
 				if (Mouse::isButtonPressed(Mouse::Left))
 				{
-					select_sound.play();
-					game_music.stop();
-					menu_music.stop();
+					audioManager.playSound("select");
+					audioManager.stopMusic("game");
+					audioManager.stopMusic("menu");
 					menu(window);
 					return false;
 				}
@@ -502,7 +500,7 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 				main_menu_sprite.setColor(Color::White);
 				music_square_sprite.setColor(Color::White);
 				isButton_select = false;
-				switch_sound.stop();
+				audioManager.stopSound("switch");
 			}
 			window.clear(Color::White);
 			window.draw(sprite_background);			// ������ ����
@@ -519,7 +517,7 @@ bool menu_restart(RenderWindow &window, Sprite sprite_figure_main, Sprite sprite
 	}
 }
 
-bool settings(RenderWindow &window)
+bool settings(RenderWindow& window)
 {
 	int menuNum = 0;
 	bool isButton_select = false;
@@ -530,7 +528,7 @@ bool settings(RenderWindow &window)
 		exit(0);
 	}
 
-	AudioManager &audioManager = AudioManager::getInstance();
+	AudioManager& audioManager = AudioManager::getInstance();
 	audioManager.playMusic("menu");
 
 	Texture mus_menu_tex, plus_tex, minus_tex, mus_game_tex, but_back_tex, mus_gen_tex, background_texture, mixer_field_texture, mixer_texture, music_square_texture;
